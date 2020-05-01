@@ -27,8 +27,12 @@ RUN mkdir /tmp/pwd && cd /tmp/pwd && \
 	tar xf bash-4.4.tar.gz && cd bash-4.4 && \
 	./configure && make && make install && \
 	mkdir -p /app && cd /app && \
-	git clone https://github.com/aristocratos/bashtop.git .
-
+	git clone https://github.com/aristocratos/bashtop.git . && \
+	yum groupremove -y "Development Tools" "Legacy Software Development" && \
+	yum erase -y git wget gcc make && \
+	yum clean all && \
+	rm -rf /var/cache/yum && \
+	rm -rf /tmp/*
 
 WORKDIR "/app"
 
